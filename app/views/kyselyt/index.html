@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Käyttäjän Mikko Mallikas kurssikyselyt</h1>
+
+  <p>
+    <a href="{{base_path}}/kurssit/new" class="btn btn-default">Lisää kurssi</a>
+    <a href="{{base_path}}/kyselyt/new" class="btn btn-default">Lisää kysely</a>
+  </p>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Kysely</th>
+        <th>Kurssi</th>
+        <th>Alkupvm</th>
+        <th>Loppupvm</th>
+        <th>Tila</th>
+        <!--<th>Vastauksia</th>
+        <th>Keskiarvo</th> -->
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <!-- Listataan pelit tähän -->
+      {% for kysely in kyselyt %}
+      <tr>
+        <td><a href="{{base_path}}/kysely/{{kysely.kyselyid}}">{{kysely.kyselynnimi}}</td>
+        <td>{{kysely.kurssiid}}</td>
+        <td>{{kysely.alkupvm}}</td>
+        <td>{{kysely.loppupvm}}</td>
+        <td>
+              {% if game.played %}
+                <label class="label label-danger">käynnissä
+              {% else %}
+                <label class="label label-success">passiivinen
+              {% endif %}
+        </td>
+        <!-- <td>15/30</td>
+        <td>3,5</td> -->
+        <th><a class="btn btn-default btn-sm" href="{{base_path}}/kysely/{{kysely.kyselyid}}/edit">Muokkaa</a></th>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

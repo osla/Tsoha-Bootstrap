@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Kysely: {{kysely.kyselynnimi}}</h1>
+  <h3>Kurssi: {{kysely.kurssiid</h3>
+  
+  <p>
+    <button class="btn btn-danger">Poista</button> <a href="#" class="{{base_path}}/kyselyt/muokkaa">Muokkaa</a>
+  </p>
+  
+  <ul>
+    <li><strong>Kurssin vastuuhenkilö:</strong> John Doe</li>
+    <li><strong>Alkupäivämäärä:</strong></li>
+    <li><strong>Loppupäivämäärä:</strong></li>
+    <li><strong>Viimeksi muokattu:</strong> 30.12.2015</li>
+    <li><strong>Tila:</strong> <label class="label label-danger">kesken</label></li>
+
+  </ul>
+  
+  <p>
+   Kysymykset
+  </p>
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Kysyjä</th>
+        <th>Kysymys</th>
+        <th>Vastauksia</th>
+        <th>Keskiarvo</th>
+        <th>Tila</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      
+      <tr>
+        <td>Tiedekunta</td>
+        <td><a href"#">Vastasiko kurssin sisältö kurssikuvausta?</a></td>
+        <td>15/30</td>
+        <td>3,5</td>
+        <th><a class="btn btn-success btn-sm" href="#">Aktiivinen</a></th>
+        <th><a class="btn btn-default btn-sm" href="#">Muokkaa</a></th>
+      </tr>
+    </tbody>
+  </table>
+
+{% endblock %}

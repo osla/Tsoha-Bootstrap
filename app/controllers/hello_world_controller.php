@@ -1,5 +1,5 @@
 <?php
-
+  //require 'app/models/kysely.php';
   class HelloWorldController extends BaseController{
 
     public static function index(){
@@ -8,32 +8,32 @@
     }
 
   public static function inquiry_list(){
-      // Testaa koodiasi täällä
       View::make('suunnitelmat/inquiry_list.html');
     }
 
   public static function login(){
-      // Testaa koodiasi täällä
       View::make('suunnitelmat/login.html');
     }
 
   public static function sandbox(){
       // Testaa koodiasi täällä
-      View::make('helloworld.html');
+      //View::make('helloworld.html');
+      $ohtu= Kysely::find(1);
+      $kaikki= Kysely::all();
+      //Debugausta Kintillä
+      Kint::dump($kaikki);
+      Kint::dump($ohtu);
     }
 
   public static function inquiry_show(){
-      // Testaa koodiasi täällä
       View::make('suunnitelmat/inquiry_show.html');
     }
   
   public static function course_show(){
-      // Testaa koodiasi täällä
       View::make('suunnitelmat/course_show.html');
     }
   
   public static function inquiry_edit(){
-      // Testaa koodiasi täällä
       View::make('suunnitelmat/inquiry_edit.html');
     }
 

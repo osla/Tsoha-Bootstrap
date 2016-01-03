@@ -39,7 +39,9 @@ CREATE TABLE Kysely(
 	tekijaID INTEGER REFERENCES Kayttaja(kayttajaID),
 	kurssiID INTEGER REFERENCES Kurssi(kurssiID),
 	alkupvm DATE,
-	loppupvm DATE
+	loppupvm DATE,
+	muokattu DATE,
+	tila boolean DEFAULT FALSE
 );
 
 CREATE TABLE Osallistumislista(
