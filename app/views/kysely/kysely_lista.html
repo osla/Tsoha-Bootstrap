@@ -12,6 +12,7 @@
       <tr>
         <th>Kysely</th>
         <th>Kurssi</th>
+        <th>Tekijä</th>
         <th>Alkupvm</th>
         <th>Loppupvm</th>
         <th>Tila</th>
@@ -26,14 +27,15 @@
       {% for kysely in kyselyt %}
       <tr>
         <td><a href="{{base_path}}/kysely/{{kysely.kyselyid}}">{{kysely.kyselynnimi}}</td>
-        <td>{{kysely.kurssiid}}</td>
+        <td>{{kysely.kurssinnimi}}</td>
+        <td>{{kysely.kayttajannimi}}
         <td>{{kysely.alkupvm}}</td>
         <td>{{kysely.loppupvm}}</td>
         <td>
-              {% if game.played %}
-                <label class="label label-danger">käynnissä
+              {% if kysely.tila %}
+                <label class="label label-success">käynnissä
               {% else %}
-                <label class="label label-success">passiivinen
+                <label class="label label-danger">passiivinen
               {% endif %}
         </td>
         <!-- <td>15/30</td>

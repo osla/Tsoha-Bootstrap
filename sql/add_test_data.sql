@@ -1,5 +1,5 @@
 -- Lisää INSERT INTO lauseet tähän tiedostoon
-INSERT INTO Opiskelija (sposti) VALUES ('mikko.mallikas@helsinki.fi');
+INSERT INTO Opiskelija (sposti) VALUES ('mika.mallikas@helsinki.fi');
 INSERT INTO Opiskelija (sposti) VALUES ('timo.mallikas@helsinki.fi');
 INSERT INTO Laitos (laitoksenNimi) VALUES ('tietojenkäsittelytieteen laitos');
 INSERT INTO Kayttaja (kayttajanNimi, kayttajanSposti, salasana) VALUES ('Opettaja, Olli', 'olli.opettaja@helsinki.fi', 'olli123');
@@ -8,3 +8,13 @@ INSERT INTO Kurssi (kurssinNimi) VALUES ('Ohjelmistotuotanto');
 INSERT INTO Kurssi (kurssinNimi) VALUES ('Johdatus tietojenkäsittelytieteeseen');
 INSERT INTO Kysely (kyselynnimi, tekijaid, kurssiID, tila) VALUES ('Ohtu syksy 2015', '1', '1', 'false');
 INSERT INTO Kysely (kyselynnimi, tekijaid, kurssiID, tila) VALUES ('Ohtu vuodenvaihde 2015', '2', '1', 'true');
+INSERT INTO Org_luokka (luokanNimi) VALUES ('Tiedekunta');
+INSERT INTO Org_luokka (luokanNimi) VALUES ('Laitos');
+INSERT INTO Org_luokka (luokanNimi) VALUES ('Kurssi');
+INSERT INTO Kysymys (kuvaus, vastausluokka) VALUES ('Vastasiko kurssin kuvaus sisältöä?', '1-5');
+INSERT INTO Kysymys (kuvaus, vastausluokka) VALUES ('Käytettiinkö kurssilla sopivia työkaluja?', '1-5');
+INSERT INTO Kysymys (kuvaus, vastausluokka) VALUES ('Miten parantaisit kurssia?', 'vapaa teksti');
+INSERT INTO Kysymyslista (kyselyid, kysymysid, luokkaid) VALUES ('1', '1', '1');
+INSERT INTO Kysymyslista (kyselyid, kysymysid, luokkaid) VALUES ('1', '2', '1');
+INSERT INTO Kysymyslista (kyselyid, kysymysid, luokkaid) VALUES ('1', '3', '2');
+INSERT INTO Kysymyslista (kyselyid, kysymysid, luokkaid) VALUES ('2', '1', '3');

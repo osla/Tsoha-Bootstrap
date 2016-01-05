@@ -11,6 +11,7 @@ class KyselyController extends BaseController{
 	public static function find($id){
 		//haetaan yksi kysely tietokannasta
 		$kysely = Kysely::find($id);
-		View::make('kysely/kysely.html', array('kysely' => $kysely));
+		$kysymyslista = Kysymys::all($id);
+		View::make('kysely/kysely.html', array('kysely' => $kysely, 'kysymyslista' => $kysymyslista));
 	}
 }

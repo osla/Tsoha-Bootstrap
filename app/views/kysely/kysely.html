@@ -8,40 +8,48 @@
     <a href="{{base_path}}/kysely/{{kysely.kyselyid}}/edit" class="btn btn-default">Muokkaa</a>
   </p>
 
+  <h3>Tiedot</h3>
   <ul>
     <li><strong>Kysely ID:</strong> {{kysely.kyselyid}}</li>
-    <li><strong>Kyselyn tekijä:</strong> {{kysely.tekijaid}}</li>
+    <li><strong>Kurssi:</strong> {{kysely.kurssinnimi}}</li>
+    <li><strong>Kyselyn tekijä:</strong> {{kysely.kayttajannimi}}</li>
     <li><strong>Alkupäivämäärä:</strong> {{kysely.alkupvm}}</li>
     <li><strong>Loppupäivämäärä:</strong> {{kysely.loppupvm}}</li>
     <li><strong>Viimeksi muokattu:</strong> {{kysely.muokattu}}</li>
-    <li><strong>Tila:</strong> <label class="label label-danger">kesken</label></li>
+    <li><strong>Tila:</strong> 
+      {% if kysely.tila %}
+      <label class="label label-success">käynnissä</label>
+      {% else %}
+      <label class="label label-danger">passiivinen</label></li>
+      {% endif %}
   </ul>
 
-  <p>
-   Kysymykset
-  </p>
+  <h3>Kysymykset</h3>
   <table class="table table-striped table-bordered">
     <thead>
       <tr>
         <th>Kysyjä</th>
         <th>Kysymys</th>
-        <th>Vastauksia</th>
-        <th>Keskiarvo</th>
-        <th>Tila</th>
+        <th>Vastauksen muoto</th>
+        <!--Lisää ominaisuuksia
+        <th>Vastauksia (kpl)</th>
+        <th>Keskiarvo</th> -->
         <th></th>
       </tr>
     </thead>
 
     <tbody>
-      
+      {% for kysymys in kysymyslista %}
       <tr>
-        <td>Tiedekunta</td>
-        <td><a href"#">Vastasiko kurssin sisältö kurssikuvausta?</a></td>
-        <td>15/30</td>
-        <td>3,5</td>
-        <th><a class="btn btn-success btn-sm" href="#">Aktiivinen</a></th>
-        <th><a class="btn btn-default btn-sm" href="#">Muokkaa</a></th>
+        <td>{{kysymys.luokannimi}}</td>
+        <td><a href="{{base_path}}/kysymys/{{kysymys.kysymysid}}">{{kysymys.kuvaus}}</a></td>
+        <td>{{kysymys.vastausluokka}}</td>
+        <th>
+        <a class="btn btn-danger" href="#">Poista</a>
+        <a class="btn btn-default" href="#">Muokkaa</a>
+        </th>
       </tr>
+      {% endfor %}
     </tbody>
   </table>
 
