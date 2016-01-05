@@ -34,11 +34,11 @@ class Kysely extends BaseModel{
 
 	public static function find($kyselyid){
 		$query=DB::connection()->prepare('SELECT * FROM Kysely WHERE kyselyid = :kyselyid LIMIT 1');
-		$query->execute(array('kyselyid' => $kyselyid ));
+		$query->execute(array('kyselyid' => $kyselyid));
 		$row = $query->fetch();
 
 		if($row){
-			$kysely[] = new Kysely(array(
+			$kysely = new Kysely(array(
 				'kyselyid' => $row['kyselyid'],
 				'kyselynnimi' => $row['kyselynnimi'],
 				'tekijaid' => $row['tekijaid'],
@@ -48,9 +48,10 @@ class Kysely extends BaseModel{
 				'muokattu' => $row['muokattu'],
 				'tila' => $row['tila']	
 			));
+
 			return $kysely;
 		}
 
-		return null;
+		//return null;
 	}
 }

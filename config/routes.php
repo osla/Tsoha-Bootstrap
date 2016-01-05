@@ -28,14 +28,15 @@
     HelloWorldController::inquiry_edit();
   });
 //Tästä eteenpäin varsinaisen sovelluksen polut
-  $routes->get('/kysely', function() {
+//Kyselyiden listaussivu
+  $routes->get('/kysely_lista', function() {
     KyselyController::index();
   });
 
     $routes->get('/', function() {
     KyselyController::index();
   });
-
-    $routes->get('/kysely/:id', function($id) {
-    KyselyController::kyselynhaku($id);
+//Kyselyn esittelysivu
+    $routes->get('/kysely/:id', function($id){
+    KyselyController::find($id);
   });
