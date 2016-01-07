@@ -36,7 +36,6 @@ CREATE TABLE Kurssi(
 CREATE TABLE Kysely(
 	kyselyID SERIAL PRIMARY KEY,
 	kyselynNimi varchar(50) NOT NULL,
-	tekijaID INTEGER REFERENCES Kayttaja(kayttajaID),
 	kurssiID INTEGER REFERENCES Kurssi(kurssiID),
 	alkupvm DATE,
 	loppupvm DATE,

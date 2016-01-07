@@ -33,10 +33,21 @@
     KyselyController::index();
   });
 
-    $routes->get('/', function() {
+  $routes->get('/', function() {
     KyselyController::index();
   });
+
+//Kyselyn lisäyslomakkeen näyttäminen
+  $routes->get('/kysely/uusi', function(){
+    KyselyController::create();
+  });
+
 //Kyselyn esittelysivu
-    $routes->get('/kysely/:id', function($id){
+  $routes->get('/kysely/:id', function($id){
     KyselyController::find($id);
+  });
+  
+//Kyselyn lisääminen tietokantaan
+  $routes->post('/kysely', function(){
+    KyselyController::store();
   });

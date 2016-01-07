@@ -18,8 +18,8 @@
   public static function sandbox(){
       // Testaa koodiasi täällä
       //View::make('helloworld.html');
-      $ohtu= Kysymys::find(1);
-      $kaikki= Kysymys::all(1);
+      $ohtu= Kysely::find(1);
+      $kaikki= Kysely::all();
       //Debugausta Kintillä
       Kint::dump($kaikki);
       Kint::dump($ohtu);

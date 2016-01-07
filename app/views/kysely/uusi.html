@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <h1>Lisää kysely</h1>
+  
+  <form method="post" action="{{base_path}}/kysely">
+    <div class="form-group">
+      <label>Kyselyn nimi</label>
+      <input type="text" name="kyselynnimi" class="form-control">
+    </div>
+
+
+    <div class="form-group">
+      <label>Kyselyn tekijä</label>
+      <input type="text" name="kayttajannimi" class="form-control">
+    </div>
+
+ <!--    <div class="form-group">
+      <label for="kurssinnimi">Kurssin nimi</label>
+        <select class="form-control" id="kurssinnimi">  
+      {% for kurssi in kurssit %}
+        <option value={{kurssi.kurssiid}}>{{kurssi.kurssinnimi}}</option>
+      {% endfor %}
+      </select>
+    </div> -->
+
+    <div class="form-group">
+      <label>Kurssin nimi</label>
+      <input type="date" name="kurssinnimi" class="form-control">
+    </div>
+
+
+    <div class="form-group">
+      <label>Alkupäivämäärä</label>
+      <input type="date" name="alkupvm" class="form-control">
+    </div>
+
+
+    <div class="form-group">
+      <label>Loppupäivämäärä</label>
+      <input type="date" name="loppupvm" class="form-control">
+    </div>
+  
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Lisää</button>
+    </div>
+  </form>
+{% endblock %}
