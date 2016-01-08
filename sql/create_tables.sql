@@ -29,14 +29,14 @@ CREATE TABLE Kayttaja(
 CREATE TABLE Kurssi(
 	kurssiID SERIAL PRIMARY KEY,
 	kurssinNimi varchar(50) NOT NULL,
-	vastuuopettajaID INTEGER REFERENCES Kayttaja(kayttajaID),
-	laitosID INTEGER REFERENCES Laitos(laitosID)
+	vastuuopettajaID INTEGER REFERENCES Kayttaja(kayttajaID) ON DELETE CASCADE,
+	laitosID INTEGER REFERENCES Laitos(laitosID) ON DELETE CASCADE
 );
 
 CREATE TABLE Kysely(
 	kyselyID SERIAL PRIMARY KEY,
 	kyselynNimi varchar(50) NOT NULL,
-	kurssiID INTEGER REFERENCES Kurssi(kurssiID),
+	kurssiID INTEGER REFERENCES Kurssi(kurssiID) ON DELETE CASCADE,
 	alkupvm DATE,
 	loppupvm DATE,
 	muokattu DATE,
@@ -44,23 +44,23 @@ CREATE TABLE Kysely(
 );
 
 CREATE TABLE Osallistumislista(
-	opiskelijaID INTEGER REFERENCES Opiskelija(opiskelijaID),
-	kurssiID INTEGER REFERENCES Kurssi(kurssiID)
+	opiskelijaID INTEGER REFERENCES Opiskelija(opiskelijaID) ON DELETE CASCADE,
+	kurssiID INTEGER REFERENCES Kurssi(kurssiID) ON DELETE CASCADE
 );
 
 CREATE TABLE Kyselylista(
-	kayttajaID INTEGER REFERENCES Kayttaja(kayttajaID),
-	kyselyID INTEGER REFERENCES Kysely(kyselyID)
+	kayttajaID INTEGER REFERENCES Kayttaja(kayttajaID) ON DELETE CASCADE,
+	kyselyID INTEGER REFERENCES Kysely(kyselyID) ON DELETE CASCADE
 );
 
 CREATE TABLE Vastauslista(
-	kyselyID INTEGER REFERENCES Kysely(kyselyID),
-	kysymysID INTEGER REFERENCES Kysymys(kysymysID),
+	kyselyID INTEGER REFERENCES Kysely(kyselyID) ON DELETE CASCADE,
+	kysymysID INTEGER REFERENCES Kysymys(kysymysID) ON DELETE CASCADE,
 	vastaus varchar(500)
 );
 
 CREATE TABLE Kysymyslista(
-	kyselyID INTEGER REFERENCES Kysely(kyselyID),
-	kysymysID INTEGER REFERENCES Kysymys(kysymysID),
-	luokkaID INTEGER REFERENCES Org_luokka(luokkaID)
+	kyselyID INTEGER REFERENCES Kysely(kyselyID) ON DELETE CASCADE,
+	kysymysID INTEGER REFERENCES Kysymys(kysymysID) ON DELETE CASCADE,
+	luokkaID INTEGER REFERENCES Org_luokka(luokkaID) ON DELETE CASCADE
 );

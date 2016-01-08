@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+
   <h1>Käyttäjän Mikko Mallikas kurssikyselyt</h1>
 
   <p>
@@ -28,7 +29,7 @@
       <tr>
         <td><a href="{{base_path}}/kysely/{{kysely.kyselyid}}">{{kysely.kyselynnimi}}</td>
         <td>{{kysely.kurssinnimi}}</td>
-        <td>{{kysely.kayttajannimi}}
+        <td>{{kysely.kayttajannimi}}</td>
         <td>{{kysely.alkupvm}}</td>
         <td>{{kysely.loppupvm}}</td>
         <td>

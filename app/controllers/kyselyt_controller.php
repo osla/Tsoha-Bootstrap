@@ -18,19 +18,25 @@ class KyselyController extends BaseController{
 
 	public static function store(){
 		$params = $_POST;
-		$kysely = new Kysely(array(
+		$attributes = array(
 			'kyselynnimi' => $params['kyselynnimi'],
-			'kayttajannimi' => $params['kayttajannimi'],
-			'kurssinnimi' => $params['kurssinnimi'],
+			'kurssiid' => $params['kurssiid'],
 			'alkupvm' => $params['alkupvm'],
 			'loppupvm' => $params['loppupvm']
-		));
+		);
 
-		Kint::dump($params);
+		$kysely = new Kysely($attributes);
+		$errors = $kysely->errors();
 
+		if(count($errors) == 0){
+			//Kysely on syötetty oikein!
 		$kysely->save();
-
-		Redirect::to('/kysely/'.$kysely->kyselyid, array('message' => 'Kysely on tallennettu!'));
+		
+		Redirect::to('/kysely/'.$kysely->kyselyid, array('message' => 'Kysely on lähes valmis. Lisää siihen seuraavaksi kysymykset!'));
+		}else{
+			//Kyselyn syötteessä on jotain vikaa!
+		View::make('/kysely/uusi.html', array('errors' => $errors, 'attributes' => $attributes));
+		}
 	}
 
 	public static function create(){

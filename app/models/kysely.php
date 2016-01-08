@@ -4,8 +4,9 @@ class Kysely extends BaseModel{
 	//atribuutit
 	public $kyselyid, $kyselynnimi, $kurssiid, $alkupvm, $loppupvm, $muokattu, $tila, $kayttajannimi, $kurssinnimi;
 	//konstruktori
-	public function _construct($attributes){
-		parent::_construct($attributes);
+	public function __construct($attributes){
+		parent::__construct($attributes);
+		$this->validators = array('validate_name');
 	}
 
 	public static function all(){
@@ -85,5 +86,8 @@ class Kysely extends BaseModel{
 
 		$this->kyselyid = $row['kyselyid'];
 
+		$query = DB::connection()->prepare('INSERT INTO Kyselylista (kyselyid, kurssi');
 	}
+
+
 }

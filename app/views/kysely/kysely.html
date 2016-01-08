@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
+  
+  {% if message %}
+  <div class="alert alert-success">
+    {{message}}
+  </div>
+  {% endif %}
 
   <h1>Kysely: {{kysely.kyselynnimi}}</h1>
   
@@ -15,7 +21,6 @@
     <li><strong>Kyselyn tekijä:</strong> {{kysely.kayttajannimi}}</li>
     <li><strong>Alkupäivämäärä:</strong> {{kysely.alkupvm}}</li>
     <li><strong>Loppupäivämäärä:</strong> {{kysely.loppupvm}}</li>
-    <li><strong>Viimeksi muokattu:</strong> {{kysely.muokattu}}</li>
     <li><strong>Tila:</strong> 
       {% if kysely.tila %}
       <label class="label label-success">käynnissä</label>

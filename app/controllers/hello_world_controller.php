@@ -18,12 +18,20 @@
   public static function sandbox(){
       // Testaa koodiasi täällä
       //View::make('helloworld.html');
-      $ohtu= Kysely::find(1);
-      $kaikki= Kysely::all();
+      //$ohtu= Kysely::find(1);
+      //$kaikki= Kysely::all();
       //Debugausta Kintillä
-      Kint::dump($kaikki);
-      Kint::dump($ohtu);
-    }
+      //Kint::dump($kaikki);
+      //Kint::dump($ohtu);
+      $doom = new Kysely(array(
+        'kyselynnimi' => '',
+        'kurssiid' => '67',
+        'alkupvm' => '2015-09-01',
+        'loppupvm' => '2017-09-01'
+        ));
+      $errors = $doom->errors();
+      Kint::dump($errors);
+  }
 
   public static function inquiry_show(){
       View::make('suunnitelmat/inquiry_show.html');

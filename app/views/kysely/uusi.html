@@ -2,43 +2,42 @@
 {% block content %}
 
   <h1>Lisää kysely</h1>
+
+{% if errors %}
+  <div class="alert alert-danger">
+    <ul>
+      {% for error in errors %}
+        <li>{{error}}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
+
   
   <form method="post" action="{{base_path}}/kysely">
     <div class="form-group">
       <label>Kyselyn nimi</label>
-      <input type="text" name="kyselynnimi" class="form-control">
+      <input type="text" name="kyselynnimi" class="form-control" value="{{attributes.kyselynnimi}}">
     </div>
-
-
-    <div class="form-group">
-      <label>Kyselyn tekijä</label>
-      <input type="text" name="kayttajannimi" class="form-control">
-    </div>
-
- <!--    <div class="form-group">
-      <label for="kurssinnimi">Kurssin nimi</label>
-        <select class="form-control" id="kurssinnimi">  
-      {% for kurssi in kurssit %}
-        <option value={{kurssi.kurssiid}}>{{kurssi.kurssinnimi}}</option>
-      {% endfor %}
-      </select>
-    </div> -->
 
     <div class="form-group">
       <label>Kurssin nimi</label>
-      <input type="date" name="kurssinnimi" class="form-control">
+        <select class="form-control" name="kurssiid">  
+      {% for kurssi in kurssit %}
+        <option value="{{kurssi.kurssiid}}">{{kurssi.kurssinnimi}}</option>
+      {% endfor %}
+      </select>
     </div>
-
 
     <div class="form-group">
       <label>Alkupäivämäärä</label>
-      <input type="date" name="alkupvm" class="form-control">
+      <input type="date" name="alkupvm" class="form-control" value="{{attributes.alkupvm}}">
     </div>
-
 
     <div class="form-group">
       <label>Loppupäivämäärä</label>
-      <input type="date" name="loppupvm" class="form-control">
+      <input type="date" name="loppupvm" class="form-control" value="{{attributes.loppupvm}}">
     </div>
   
     <div class="form-group">
