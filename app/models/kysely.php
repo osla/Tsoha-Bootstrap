@@ -2,11 +2,11 @@
 
 class Kysely extends BaseModel{
 	//atribuutit
-	public $kyselyid, $kyselynnimi, $kurssiid, $alkupvm, $loppupvm, $muokattu, $tila, $kayttajannimi, $kurssinnimi;
+	public $kyselyid, $kyselynnimi, $kurssiid, $alkupvm, $loppupvm, $tila, $kayttajannimi, $kurssinnimi;
 	//konstruktori
 	public function __construct($attributes){
 		parent::__construct($attributes);
-		$this->validators = array('validate_name');
+		$this->validators = array('validate_name', 'validate_date');
 	}
 
 	public static function all(){
@@ -31,7 +31,6 @@ class Kysely extends BaseModel{
 				'kurssiid' => $row['kurssiid'],
 				'alkupvm' => $row['alkupvm'],
 				'loppupvm' => $row['loppupvm'],
-				'muokattu' => $row['muokattu'],
 				'tila' => $row['tila'],
 				'kayttajannimi' => $row['kayttajannimi'],
 				'kurssinnimi' => $row['kurssinnimi']
@@ -86,7 +85,8 @@ class Kysely extends BaseModel{
 
 		$this->kyselyid = $row['kyselyid'];
 
-		$query = DB::connection()->prepare('INSERT INTO Kyselylista (kyselyid, kurssi');
+		// lisätään kyselylistaan kysely oikealle käyttäjälle kirjautumisen perusteella
+		//$query = DB::connection()->prepare('INSERT INTO Kyselylista (kyselyid, kurssi));
 	}
 
 

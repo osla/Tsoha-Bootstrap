@@ -17,13 +17,14 @@ class KyselyController extends BaseController{
 
 
 	public static function store(){
+		$kurssit = Kurssi::all();
 		$params = $_POST;
-		$attributes = array(
+		$attributes = new Kysely(array(
 			'kyselynnimi' => $params['kyselynnimi'],
 			'kurssiid' => $params['kurssiid'],
 			'alkupvm' => $params['alkupvm'],
 			'loppupvm' => $params['loppupvm']
-		);
+		));
 
 		$kysely = new Kysely($attributes);
 		$errors = $kysely->errors();
@@ -35,7 +36,7 @@ class KyselyController extends BaseController{
 		Redirect::to('/kysely/'.$kysely->kyselyid, array('message' => 'Kysely on lähes valmis. Lisää siihen seuraavaksi kysymykset!'));
 		}else{
 			//Kyselyn syötteessä on jotain vikaa!
-		View::make('/kysely/uusi.html', array('errors' => $errors, 'attributes' => $attributes));
+		View::make('/kysely/uusi.html', array('kurssit' => $kurssit, 'errors' => $errors, 'attributes' => $attributes));
 		}
 	}
 

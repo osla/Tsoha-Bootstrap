@@ -23,11 +23,9 @@
         // Kutsu validointimetodia tässä ja lisää sen palauttamat virheet errors-taulukkoon
         $error = $this->{$validator}();
         if ($error != null) {
-          $errors[] = $error;
+          $errors = array_merge($errors, $error);
         }
-
       }
-
       return $errors;
     }
 
@@ -45,10 +43,31 @@
       }
 
       if(strlen($this->kyselynnimi) < 3){
-        $errors[]='Nimen pituuden tulee olla vähintään kolme merkkiä!';
+        $errors[]='Nimen pituuden tulee olla vähintään 3 ja enintään 50 merkkiä!';
+      }
+
+      if(strlen($this->kyselynnimi) > 50){
+        $errors[]='Nimen pituuden tulee olla vähintään 3 ja enintään 50 merkkiä!';
       }
 
       return $errors;
-    }  
+    } 
+
+
+    public function validate_date(){
+      //$malli = '/^(0[1-9]|[12][0-9]|3[01])[\-\/.](0[1-9]|1[012])[\-\/.](19|20)\d\d$/';
+      $malli = '/^(19|20)\d\d[\-\/.](0[1-9]|1[012])[\-\/.](0[1-9]|[12][0-9]|3[01])$/';
+      $errors = array();
+      if (!preg_match($malli, $this->alkupvm)) {
+        $errors[]='Alkupäivämäärän tulee olla muodossa vvvv-kk-pp';
+      }
+      if (!preg_match($malli, $this->loppupvm)) {
+        $errors[]='Loppupäivämäärän tulee olla muodossa vvvv-kk-pp';
+      }
+
+      return $errors;
+
+    }
+
   }
 
