@@ -46,4 +46,47 @@ class KyselyController extends BaseController{
 		$kayttajat = Kayttaja::all();
 		View::make('kysely/uusi.html', array('kurssit' => $kurssit, 'kayttajat' => $kayttajat));
 	}
+
+	//Kyselyn muokkaaminen (lomakkeen esittäminen)
+	public static function edit($id) {
+		$kysely = Kysely::find($id);
+		$kurssit = Kurssi::all();
+		View::make('kysely/edit.html', array('attributes' => $kysely, 'kurssit' => $kurssit));
+	}
+
+	//Kyselyn muokkaaminen (lomakkeen käsittely)
+	public static function update($id){
+		$params = $_POST;
+
+		$attributes = array(
+			'kyselyid' => $id,
+			'kyselynnimi' => $params['kyselynnimi'],
+			'kurssinnimi' => $params['kurssinnimi'],
+			'alkupvm' => $params['alkupvm'],
+			'loppupvm' => $params['loppupvm'],
+			'tila' => $params['tila']
+		);
+
+		$kysely = new Kysely($attributes);
+		$errors = $kysely->errors();
+
+		if(count($errors) > 0){
+			View::make('kysely/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+		} else {
+			$kysely->update();
+
+			Redirect::to('/kysely/'. $kysely->kyselyid, array('message' => 'Kyselyä on muokattu onnistuneesti'));
+		}
+	}
+
+	//Kyselyn poistaminen
+	public static function destroy($id){
+		//alustetaan Kysely-olio annetulla id:llä
+		$kysely = new Kysely(array('kyselyid' => $id));
+		//kutsutaan Kysely-luokan metodia destroy, joka poistaa kyselyn sen id:llä
+		$kysely->destroy();
+
+		Redirect::to('/kysely_lista', array('message' => 'Kysely on poistettu onnistuneesti!'));
+	}
+
 }

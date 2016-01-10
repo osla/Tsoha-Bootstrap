@@ -61,7 +61,6 @@ class Kysely extends BaseModel{
 				'kurssiid' => $row['kurssiid'],
 				'alkupvm' => $row['alkupvm'],
 				'loppupvm' => $row['loppupvm'],
-				'muokattu' => $row['muokattu'],
 				'tila' => $row['tila'],
 				'kayttajannimi' => $row['kayttajannimi'],
 				'kurssinnimi' => $row['kurssinnimi']	
@@ -89,5 +88,20 @@ class Kysely extends BaseModel{
 		//$query = DB::connection()->prepare('INSERT INTO Kyselylista (kyselyid, kurssi));
 	}
 
+	public function update(){
+
+		$query = DB::connection()->prepare('UPDATE Kysely (kyselynnimi, kurssiid, alkupvm, loppupvm, tila) 
+			VALUES (:kyselynnimi, :kurssiid, :alkupvm, :loppupvm, :tila)');
+		$query->execute(array('kyselynnimi' => $this->kyselynnimi, 'kurssiid' => $this->kurssiid,
+			'alkupvm' => $this->alkupvm, 'loppupvm' => $this->loppupvm, 'tila' => $this->tila));
+
+	}
+
+	public function destroy(){
+
+		$query = DB::connection()->prepare('DELETE FROM Kysely WHERE kyselyid = :kyselyid');
+		$query->execute(array('kyselyid' => $this->kyselyid));
+
+	}
 
 }

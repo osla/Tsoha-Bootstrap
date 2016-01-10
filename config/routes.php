@@ -51,3 +51,18 @@
   $routes->post('/kysely', function(){
     KyselyController::store();
   });
+
+//Kyselyn muokkauslomakkeen esittäminen
+  $routes->get('/kysely/:id/edit', function($id){
+    KyselyController::edit($id);
+  });
+
+//Kyselyn muokkaaminen
+  $routes->post('/kysely/:id/edit', function($id){
+    KyselyController::update($id);
+  });
+
+//Kyselyn poisto
+  $routes->post('/kysely/:id/destroy', function($id){
+    KyselyController::destroy($id);
+  });

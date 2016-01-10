@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
+{% import "macros/forms.html" as forms %}
+
+  {% if message %}
+  <div class="alert alert-success">
+    {{message}}
+  </div>
+  {% endif %}
 
   <h1>Käyttäjän Mikko Mallikas kurssikyselyt</h1>
 
@@ -19,6 +26,7 @@
         <th>Tila</th>
         <!--<th>Vastauksia</th>
         <th>Keskiarvo</th> -->
+        <th></th>
         <th></th>
       </tr>
     </thead>
@@ -41,7 +49,12 @@
         </td>
         <!-- <td>15/30</td>
         <td>3,5</td> -->
-        <th><a class="btn btn-default btn-sm" href="{{base_path}}/kysely/{{kysely.kyselyid}}/edit">Muokkaa</a></th>
+        <th>
+          <a class="btn btn-default btn-sm" href="{{base_path}}/kysely/{{kysely.kyselyid}}/edit">Muokkaa</a>
+        </th>
+        <th>
+          {{forms.destroy_button("#{base_path}/kysely/#{kysely.kyselyid}/destroy")}}
+        </th>
       </tr>
       {% endfor %}
     </tbody>
