@@ -24,7 +24,7 @@
 
     <div class="form-group">
       <label>Kurssin nimi</label>
-        <select class="form-control" name="kurssiid" value="{{attributes.kurssinnimi}}">  
+        <select class="form-control" name="kurssiid">  
       {% for kurssi in kurssit %}
         <option value="{{kurssi.kurssiid}}">{{kurssi.kurssinnimi}}</option>
       {% endfor %}
@@ -41,9 +41,11 @@
       <input type="date" name="loppupvm" class="form-control" value="{{attributes.loppupvm}}">
     </div>
   
-    <div class="btn-group inline pull-left">  
-      <button type="submit" class="btn btn-primary">Lisää</button>
-      {{forms.destroy_button("#{base_path}/kysely/#{kysely.kyselyid}/destroy")}}
+    <div>
+    <ul class="list-inline">
+      <li><button type="submit" class="btn btn-primary">Tallenna</button></li>
+      <li>{{forms.destroy_button("#{base_path}/kysely/#{kysely.kyselyid}/destroy")}}</li>
+    </ul>
     </div>
   </form>
 {% endblock %}

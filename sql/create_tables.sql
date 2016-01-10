@@ -39,7 +39,6 @@ CREATE TABLE Kysely(
 	kurssiID INTEGER REFERENCES Kurssi(kurssiID) ON DELETE CASCADE,
 	alkupvm DATE,
 	loppupvm DATE,
-	muokattu DATE,
 	tila boolean DEFAULT FALSE
 );
 

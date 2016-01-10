@@ -10,10 +10,11 @@
 
   <h1>Kysely: {{kysely.kyselynnimi}}</h1>
   
-  <div class "btn-group inline pull-left">
-    {{forms.destroy_button("#{base_path}/kysely/#{kysely.kyselyid}/destroy")}}
-    <a href="{{base_path}}/kysely/{{kysely.kyselyid}}/edit" class="btn btn-default">Muokkaa</a>
-
+  <div>
+  <ul class="list-inline">
+    <li> {{forms.destroy_button("#{base_path}/kysely/#{kysely.kyselyid}/destroy")}} </li>
+    <li><a href="{{base_path}}/kysely/{{kysely.kyselyid}}/edit" class="btn btn-default">Muokkaa</a></li>
+  </ul>
   </div>
 
   <h3>Tiedot</h3>

@@ -23,14 +23,16 @@
       //Debugausta Kintillä
       //Kint::dump($kaikki);
       //Kint::dump($ohtu);
-      $doom = new Kysely(array(
+      /*$doom = new Kysely(array(
         'kyselynnimi' => '',
         'kurssiid' => '67',
         'alkupvm' => '2015-09-01',
         'loppupvm' => '2017-09-01'
         ));
       $errors = $doom->errors();
-      Kint::dump($errors);
+      */
+      //Kint::dump($params);
+      //Kint::dump($errors);
   }
 
   public static function inquiry_show(){

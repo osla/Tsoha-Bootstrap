@@ -48,7 +48,7 @@
   });
   
 //Kyselyn lisääminen tietokantaan
-  $routes->post('/kysely', function(){
+  $routes->post('/kysely/', function(){
     KyselyController::store();
   });
 
@@ -65,4 +65,14 @@
 //Kyselyn poisto
   $routes->post('/kysely/:id/destroy', function($id){
     KyselyController::destroy($id);
+  });
+
+//Kirjautumislomakkeen esittäminen
+  $routes->get('/login', function(){
+    KyselyController::login();
+  });
+
+  //Kirjautumisen käsittely
+  $routes->post('/login', function(){
+    KyselyController::handle_login();
   });
