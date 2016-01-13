@@ -69,10 +69,10 @@
 
 //Kirjautumislomakkeen esittäminen
   $routes->get('/login', function(){
-    KyselyController::login();
+    UserController::login();
   });
 
   //Kirjautumisen käsittely
   $routes->post('/login', function(){
-    KyselyController::handle_login();
+    UserController::handle_login();
   });

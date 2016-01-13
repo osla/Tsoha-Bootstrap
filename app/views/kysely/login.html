@@ -1,25 +1,34 @@
 {% extends "base.html" %}
 {% block content %}
+
+  {% if message %}
+  <div class="alert alert-success">
+    {{message}}
+  </div>
+  {% endif %}
+
   <h1>Kurssikysely</h1>
   <p>Tämä matemaattis-luonnontieteellisen tiedekunnan kurssikysely-sovellus. Sovelluksen avulla kurssin vastuuopettaja voi kysyä opiskelijoiden mielipiteen kurssista.</p>
   <h3>Kirjaudu sisään</h3>
 
   <!-- Kaikki lomakkeen elementit form-tagin sisään -->
-  <form method="post" action#{{base_path}}/login>
+  <form method="post" action="{{base_path}}/login">
     <!-- Tekstikenttä käyttäjätunnukselle -->
     <div class="form-group">
       <label>Käyttäjätunnus</label>
-      <input type="text" class="form-control" name="username" value="{{username}}">
+      <input type="text" class="form-control" name="kayttajansposti" value="{{username}}">
     </div>
 
     <!-- Salasanakenttä salasanalle -->
     <div class="form-group">
       <label>Salasana</label>
-      <input type="password" class="form-control" name"password">
+      <input type="password" class="form-control" name"salasana">
     </div>
 
     <button type="submit" class="btn btn-primary">Kirjaudu sisään</button>
   <p>Eikö sinulla ole tunnuksia? Rekisteröidy <a href="rekisteroidy"> tästä.</a></p>
   </form>
+
+
 
 {% endblock %}
