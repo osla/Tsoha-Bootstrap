@@ -8,7 +8,9 @@
   </div>
   {% endif %}
 
-  <h1>Käyttäjän Mikko Mallikas kurssikyselyt</h1>
+  <!--{% if user_logged_in %}
+    <h1>Käyttäjän {{user_logged_in.kayttajannimi}} kurssikyselyt</h1>
+  {% endif %}-->
 
   <p>
     <a href="{{base_path}}/kurssit/new" class="btn btn-default">Lisää kurssi</a>

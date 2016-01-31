@@ -4,6 +4,11 @@
 
     public static function get_user_logged_in(){
       // Toteuta kirjautuneen käyttäjän haku tähän
+      if(isset($_SESSION['user'])){
+        $kayttajaid = $_SESSION['user'];
+        $user = User::find($kayttajaid);
+        return $user;
+      }
       return null;
     }
 

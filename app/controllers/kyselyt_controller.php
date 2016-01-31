@@ -72,13 +72,13 @@ class KyselyController extends BaseController{
 		$kysely = new Kysely($attributes);
 		$errors = $kysely->errors();
 
-		/*if(count($errors) > 0){
+		if(count($errors) > 0){
 			View::make('kysely/edit.html', array('errors' => $errors, 'attributes' => $attributes));
 		} else {
 			$kysely->update();
 
 			Redirect::to('/kysely/'. $kysely->kyselyid, array('message' => 'Kyselyä on muokattu onnistuneesti'));
-		}*/
+		}
 	}
 
 	//Kyselyn poistaminen

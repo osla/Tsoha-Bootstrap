@@ -38,7 +38,7 @@ class Kayttaja extends BaseModel{
 		$row = $query->fetch();
 
 		if($row){
-			$kayttaja = new Kayttaja(array(
+			$kayttaja = new User(array(
 				'kayttajaid' => $row['kayttajaid'],
 				'kayttajannimi' => $row['kayttajannimi'],
 				'kayttajansposti' => $row['kayttajansposti'],

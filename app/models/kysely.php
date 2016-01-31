@@ -14,7 +14,7 @@ class Kysely extends BaseModel{
 		//Esimerkkikysely $query=DB::connection()->prepare('SELECT * FROM Kysely');
 		//Suoritetaan kysely
 		$query=DB::connection()->prepare('SELECT Kysely.kyselyid, Kysely.kyselynnimi, Kysely.kurssiid,
-		Kysely.alkupvm, Kysely.loppupvm, Kysely.muokattu, Kysely.tila, Kayttaja.kayttajannimi, Kurssi.kurssinnimi
+		Kysely.alkupvm, Kysely.loppupvm, Kysely.tila, Kayttaja.kayttajannimi, Kurssi.kurssinnimi
 		FROM Kysely
 		LEFT JOIN Kyselylista ON Kysely.kyselyid = Kyselylista.kyselyid
 		LEFT JOIN Kayttaja ON Kyselylista.kayttajaid = Kayttaja.kayttajaid

@@ -5,15 +5,11 @@
   // });
 
   $routes->get('/hiekkalaatikko', function() {
-    HelloWorldController::sandbox();
+    User::authenticate();
   });
 
   $routes->get('/inquiry_list', function() {
     HelloWorldController::inquiry_list();
-  });
-
-  $routes->get('/login', function() {
-    HelloWorldController::login();
   });
 
   $routes->get('/inquiry_show', function() {

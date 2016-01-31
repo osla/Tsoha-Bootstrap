@@ -3,7 +3,7 @@
 class User extends BaseModel {
 
 //Atribuutit
-	public $id, $nimi, $sposti, $salasana;
+	public $kayttajaid, $kayttajannimi, $kayttajansposti, $salasana;
 
 	public function __construct($attributes) {
 		parent::__construct($attributes);
@@ -18,25 +18,25 @@ class User extends BaseModel {
 
 		foreach ($rows as $row){
 			$users[]=new User(array(
-				'id' => $row['kayttajaid'],
-				'nimi' => $row['kayttajannimi'],
-				'sposti' => $row['kayttajansposti'],
+				'kayttajaid' => $row['kayttajaid'],
+				'kayttajannimi' => $row['kayttajannimi'],
+				'kayttajansposti' => $row['kayttajansposti'],
 				'salasana' => $row['salasana'],
 			));
 		}
 		return $users;
 	}
 
-	public static find($id){
+	public static function find($id){
 		$query= DB::connection()->prepare('SELECT * FROM Kayttaja WHERE kayttajaid=:$id LIMIT 1');
-		$query->execute(array('kayttajaid') => $id));
+		$query->execute(array('kayttajaid' => $id));
 		$row =$query->fetch();
 
 		if ($row) {
 			$user = new User(array(
-				'id' => $row['kayttajaid'],
-				'nimi' => $row['kayttajannimi'],
-				'sposti' => $row['kayttajansposti'],
+				'kayttajaid' => $row['kayttajaid'],
+				'kayttajannimi' => $row['kayttajannimi'],
+				'kayttajansposti' => $row['kayttajansposti'],
 				'salasana' => $row['salasana'],
 			));
 
@@ -46,17 +46,19 @@ class User extends BaseModel {
 
 	public function authenticate($kayttajansposti, $salasana){
 		$query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE kayttajansposti =:kayttajansposti AND salasana =:salasana');
-		$query->execute(array('kayttajansposti'=>$kayttajansposti, 'salasana' => $salasana));
+		$query->execute(array('kayttajansposti' => $kayttajansposti, 'salasana' => $salasana));
 		$row = $query->fetch();
-		Kint::dump($row);
+		//Kint::dump($row);
 		if($row){
 			$user = new User(array(
-				'id' => $row['kayttajaid'],
-				'kayttajansposti' => $row['kayttajannimi'],
-				'sposti' => $row['kayttajansposti'],
-				'salasana' => $row['salasana'],
+				'kayttajaid' => $row['kayttajaid'],
+				'kayttajannimi' => $row['kayttajannimi'],
+				'kayttajansposti' => $row['kayttajansposti'],
+				'salasana' => $row['salasana']
 			));
-			return $user
+
+			return $user;
+
 		} else {
 			return null;
 		}
