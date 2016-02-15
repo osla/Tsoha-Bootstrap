@@ -2,7 +2,7 @@
 
 class Kysely extends BaseModel{
 	//atribuutit
-	public $kyselyid, $kyselynnimi, $kurssiid, $alkupvm, $loppupvm, $tila, $kayttajannimi, $kurssinnimi;
+	public $kyselyid, $kyselynnimi, $kurssiid, $alkupvm, $loppupvm, $tila; // $kayttajannimi, $kurssinnimi;
 	//konstruktori
 	public function __construct($attributes){
 		parent::__construct($attributes);
@@ -43,7 +43,7 @@ class Kysely extends BaseModel{
 	public static function find($kyselyid){
 		//$query=DB::connection()->prepare('SELECT * FROM Kysely WHERE kyselyid = :kyselyid LIMIT 1');
 		$query=DB::connection()->prepare('SELECT Kysely.kyselyid, Kysely.kyselynnimi, Kysely.kurssiid,
-		Kysely.alkupvm, Kysely.loppupvm, Kysely.muokattu, Kysely.tila, Kayttaja.kayttajannimi, 
+		Kysely.alkupvm, Kysely.loppupvm, Kysely.tila, Kayttaja.kayttajannimi, 
 		Kurssi.kurssinnimi
 		FROM Kysely
 		LEFT JOIN Kyselylista ON Kysely.kyselyid = Kyselylista.kyselyid
@@ -91,13 +91,14 @@ class Kysely extends BaseModel{
 	public function update(){
 
 		$query = DB::connection()->prepare('UPDATE Kysely SET kyselyid=:kyselyid, kyselynnimi=:kyselynnimi, kurssiid=:kurssiid, alkupvm=:alkupvm, loppupvm=:loppupvm, tila=:tila
-			WHERE kyselyid=:kyselyid'); 
+			WHERE kyselyid=:kyselyid RETURNING kyselyid'); 
 
 		$query->execute(array('kyselyid' => $this->$kyselyid, 'kyselynnimi' => $this->kyselynnimi, 'kurssiid' => $this->kurssiid,
 			'alkupvm' => $this->alkupvm, 'loppupvm' => $this->loppupvm, 'tila' => $this->tila));
+		$row = $query->fetch();
 
-		//$row = $query-fetch();
-		//Kint::dump($row);
+		Kint::dump($row);
+		$this->kyselyid = $row['kyselyid'];
 	}
 
 	public function destroy(){

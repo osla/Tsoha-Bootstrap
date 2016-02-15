@@ -5,7 +5,7 @@
   // });
 
   $routes->get('/hiekkalaatikko', function() {
-    User::authenticate();
+    KyselyController::update(22);
   });
 
   $routes->get('/inquiry_list', function() {

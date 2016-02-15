@@ -1,5 +1,7 @@
 <?php
 
+//require 'app/models/kysely.php';
+
 class KyselyController extends BaseController{
 
 	public static function index(){
@@ -57,17 +59,18 @@ class KyselyController extends BaseController{
 	//Kyselyn muokkaaminen (lomakkeen käsittely)
 	public static function update($id){
 		$params = $_POST;
-
+		//$kyselyid = Kysely::find($id);
 		$attributes = array(
 			'kyselyid' => $id,
 			'kyselynnimi' => $params['kyselynnimi'],
-			'kurssinnimi' => $params['kurssinnimi'],
+			'kurssiid' => $params['kurssiid'],
 			'alkupvm' => $params['alkupvm'],
 			'loppupvm' => $params['loppupvm'],
 			'tila' => $params['tila']
 		);
 
-		Kint::dump($params);
+		// Kint::trace();
+		// Kint::dump($attributes);
 
 		$kysely = new Kysely($attributes);
 		$errors = $kysely->errors();
@@ -76,7 +79,6 @@ class KyselyController extends BaseController{
 			View::make('kysely/edit.html', array('errors' => $errors, 'attributes' => $attributes));
 		} else {
 			$kysely->update();
-
 			Redirect::to('/kysely/'. $kysely->kyselyid, array('message' => 'Kyselyä on muokattu onnistuneesti'));
 		}
 	}
