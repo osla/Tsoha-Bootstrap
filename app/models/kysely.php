@@ -89,10 +89,10 @@ class Kysely extends BaseModel{
 
 	public function update(){
 
-		$query = DB::connection()->prepare('UPDATE Kysely SET kyselyid=:kyselyid, kyselynnimi=:kyselynnimi, kurssiid=:kurssiid, alkupvm=:alkupvm, loppupvm=:loppupvm, tila=:tila
+		$query = DB::connection()->prepare('UPDATE Kysely SET kyselynnimi=:kyselynnimi, kurssiid=:kurssiid, alkupvm=:alkupvm, loppupvm=:loppupvm, tila=:tila
 			WHERE kyselyid=:kyselyid'); 
 		
-		$query->execute(array('kyselyid' => $this->$kyselyid, 'kyselynnimi' => $this->kyselynnimi, 'kurssiid' => $this->kurssiid, 'alkupvm' => $this->alkupvm, 'loppupvm' => $this->loppupvm, 'tila' => $this->tila));
+		$query->execute(array('kyselyid' => $this->kyselyid, 'kyselynnimi' => $this->kyselynnimi, 'kurssiid' => $this->kurssiid, 'alkupvm' => $this->alkupvm, 'loppupvm' => $this->loppupvm, 'tila' => $this->tila));
 		//$row = $query->fetch();
 
 		//Kint::dump($row);
