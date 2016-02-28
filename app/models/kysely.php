@@ -2,7 +2,7 @@
 
 class Kysely extends BaseModel{
 	//atribuutit
-	public $kyselyid, $kyselynnimi, $kurssiid, $alkupvm, $loppupvm, $tila, $kayttajannimi, $kurssinnimi;
+	public $kyselyid, $kyselynnimi, $kurssiid, $alkupvm, $loppupvm, $tila, $kayttajannimi, $kurssinnimi, $kayttajaid;
 	//konstruktori
 	public function __construct($attributes){
 		parent::__construct($attributes);
@@ -12,7 +12,7 @@ class Kysely extends BaseModel{
 	public static function all(){
 		//Alustetaan kysely tietokantayhteydellä
 		$query=DB::connection()->prepare('SELECT Kysely.kyselyid, Kysely.kyselynnimi, Kysely.kurssiid,
-		Kysely.alkupvm, Kysely.loppupvm, Kysely.tila, Kayttaja.kayttajannimi, Kurssi.kurssinnimi
+		Kysely.alkupvm, Kysely.loppupvm, Kysely.tila, Kayttaja.kayttajannimi, Kayttaja.kayttajaid, Kurssi.kurssinnimi
 		FROM Kysely
 		LEFT JOIN Kyselylista ON Kysely.kyselyid = Kyselylista.kyselyid
 		LEFT JOIN Kayttaja ON Kyselylista.kayttajaid = Kayttaja.kayttajaid
@@ -31,6 +31,7 @@ class Kysely extends BaseModel{
 				'alkupvm' => $row['alkupvm'],
 				'loppupvm' => $row['loppupvm'],
 				'tila' => $row['tila'],
+				'kayttajaid' => $row['kayttajaid'],
 				'kayttajannimi' => $row['kayttajannimi'],
 				'kurssinnimi' => $row['kurssinnimi']
 			));
@@ -42,7 +43,7 @@ class Kysely extends BaseModel{
 	public static function find($kyselyid){
 		//$query=DB::connection()->prepare('SELECT * FROM Kysely WHERE kyselyid = :kyselyid LIMIT 1');
 		$query=DB::connection()->prepare('SELECT Kysely.kyselyid, Kysely.kyselynnimi, Kysely.kurssiid,
-		Kysely.alkupvm, Kysely.loppupvm, Kysely.tila, Kayttaja.kayttajannimi, 
+		Kysely.alkupvm, Kysely.loppupvm, Kysely.tila, Kayttaja.kayttajannimi, Kayttaja.kayttajaid, 
 		Kurssi.kurssinnimi
 		FROM Kysely
 		LEFT JOIN Kyselylista ON Kysely.kyselyid = Kyselylista.kyselyid
@@ -61,6 +62,7 @@ class Kysely extends BaseModel{
 				'alkupvm' => $row['alkupvm'],
 				'loppupvm' => $row['loppupvm'],
 				'tila' => $row['tila'],
+				'kayttajaid' => $row['kayttajaid'],
 				'kayttajannimi' => $row['kayttajannimi'],
 				'kurssinnimi' => $row['kurssinnimi']	
 			));
@@ -73,15 +75,23 @@ class Kysely extends BaseModel{
 
 	public function save(){
 
-		$query = DB::connection()->prepare('INSERT INTO Kysely (kyselynnimi, kurssiid, alkupvm, loppupvm) 
+		$query = DB::connection()->prepare('INSERT INTO Kysely (kyselynnimi, kurssiid, alkupvm, loppupvm)
 			VALUES (:kyselynnimi, :kurssiid, :alkupvm, :loppupvm) RETURNING kyselyid');
 		$query->execute(array('kyselynnimi' => $this->kyselynnimi, 'kurssiid' => $this->kurssiid,
 			'alkupvm' => $this->alkupvm, 'loppupvm' => $this->loppupvm));
 		$row = $query->fetch();
+		
+		$this->kyselyid = $row['kyselyid'];
+		
+		$query = DB::connection()->prepare('INSERT INTO Kyselylista (kayttajaid, kyselyid)
+			VALUES (:kayttajaid, :kyselyid)');
+		$query->execute(array('kayttajaid' => $this->kayttajaid, 'kyselyid' => $this->kyselyid));
+
+
 		//Kint::trace();
 		//Kint::dump($row);
 
-		$this->kyselyid = $row['kyselyid'];
+		
 
 		// lisätään kyselylistaan kysely oikealle käyttäjälle kirjautumisen perusteella
 		//$query = DB::connection()->prepare('INSERT INTO Kyselylista (kyselyid, kurssi));

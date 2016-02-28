@@ -72,3 +72,8 @@
   $routes->post('/login', function(){
     UserController::handle_login();
   });
+
+  //Uloskirjautuminen
+  $routes->post('/logout', function(){
+    UserController::logout();
+  });

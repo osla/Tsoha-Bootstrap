@@ -16,7 +16,7 @@ class UserController extends BaseController{
 		} else {
 			$_SESSION['user'] = $user->kayttajaid;
 			//Kint::dump($user);
-			Redirect::to('/', array('message' => 'Tervetuloa takaisin! ' . $user->kayttajannimi . '!'));
+			Redirect::to('/', array('message' => 'Tervetuloa takaisin ' . $user->kayttajannimi . '!'));
 		}
 	}
 }	

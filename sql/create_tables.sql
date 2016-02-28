@@ -48,7 +48,8 @@ CREATE TABLE Osallistumislista(
 
 CREATE TABLE Kyselylista(
 	kayttajaID varchar(50) REFERENCES Kayttaja(kayttajaID) ON DELETE CASCADE,
-	kyselyID INTEGER REFERENCES Kysely(kyselyID) ON DELETE CASCADE
+	kyselyID INTEGER REFERENCES Kysely(kyselyID) ON DELETE CASCADE,
+	PRIMARY KEY (kayttajaID, kyselyID)
 );
 
 CREATE TABLE Vastauslista(

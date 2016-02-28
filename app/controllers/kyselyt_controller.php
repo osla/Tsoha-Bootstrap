@@ -6,12 +6,14 @@ class KyselyController extends BaseController{
 
 	public static function index(){
 		//haetaan kaikki kurssikyselyt tietokannasta
+		self::check_logged_in();
 		$kyselyt = Kysely::all();
 		View::make('kysely/kysely_lista.html', array('kyselyt' => $kyselyt));
 	}
 
 	public static function find($id){
 		//haetaan yksi kysely tietokannasta
+		self::check_logged_in();
 		$kysely = Kysely::find($id);
 		$kysymyslista = Kysymys::all($id);
 		View::make('kysely/kysely.html', array('kysely' => $kysely, 'kysymyslista' => $kysymyslista));
@@ -19,13 +21,19 @@ class KyselyController extends BaseController{
 
 
 	public static function store(){
+		self::check_logged_in();
+        $kayttajaid = $_SESSION['user'];
+        $user = User::find($kayttajaid);
+        //$kayttajannimi = $user->kayttajannimi;
+		//Kint::dump($kayttajannimi);
 		$kurssit = Kurssi::all();
 		$params = $_POST;
 		$attributes = new Kysely(array(
 			'kyselynnimi' => $params['kyselynnimi'],
 			'kurssiid' => $params['kurssiid'],
 			'alkupvm' => $params['alkupvm'],
-			'loppupvm' => $params['loppupvm']
+			'loppupvm' => $params['loppupvm'],
+			'kayttajaid' => $kayttajaid
 		));
 
 		$kysely = new Kysely($attributes);
@@ -43,6 +51,7 @@ class KyselyController extends BaseController{
 	}
 
 	public static function create(){
+		self::check_logged_in();
 		//haetaan uuden kyselyn luomiseen tarvittavat tiedot
 		$kurssit = Kurssi::all();
 		$kayttajat = Kayttaja::all();
@@ -51,6 +60,7 @@ class KyselyController extends BaseController{
 
 	//Kyselyn muokkaaminen (lomakkeen esittäminen)
 	public static function edit($id) {
+		self::check_logged_in();
 		$kysely = Kysely::find($id);
 		$kurssit = Kurssi::all();
 		View::make('kysely/edit.html', array('attributes' => $kysely, 'kurssit' => $kurssit));
@@ -58,9 +68,9 @@ class KyselyController extends BaseController{
 
 	//Kyselyn muokkaaminen (lomakkeen käsittely)
 	public static function update($id){
+		self::check_logged_in();
 		$params = $_POST;
 		$kyselyid = $params['kyselyid'];
-
 
 		$attributes = array(
 			'kyselyid' => $kyselyid,
@@ -68,6 +78,7 @@ class KyselyController extends BaseController{
 			'kurssiid' => $params['kurssiid'],
 			'alkupvm' => $params['alkupvm'],
 			'loppupvm' => $params['loppupvm'],
+			//'kayttajannimi' => $params['kayttajannimi'],
 			'tila' => $params['tila']
 		);
 
@@ -87,6 +98,7 @@ class KyselyController extends BaseController{
 
 	//Kyselyn poistaminen
 	public static function destroy($id){
+		self::check_logged_in();
 		//alustetaan Kysely-olio annetulla id:llä
 		$kysely = new Kysely(array('kyselyid' => $id));
 		//kutsutaan Kysely-luokan metodia destroy, joka poistaa kyselyn sen id:llä
