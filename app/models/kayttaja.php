@@ -2,7 +2,7 @@
 
 class Kayttaja extends BaseModel{
 	//atribuutit
-	public $kayttajaid, $kayttajannimi, $kayttajansposti, $salasana;
+	public $kayttajaid, $kayttajannimi, $salasana;
 	//konstruktori
 	public function _construct($attributes){
 		parent::_construct($attributes);
@@ -21,7 +21,6 @@ class Kayttaja extends BaseModel{
 			$kayttajat[] = new Kayttaja(array(
 				'kayttajaid' => $row['kayttajaid'],
 				'kayttajannimi' => $row['kayttajannimi'],
-				'kayttajansposti' => $row['kayttajansposti'],
 				'salasana' => $row['salasana'],
 			));
 		}
@@ -41,7 +40,6 @@ class Kayttaja extends BaseModel{
 			$kayttaja = new User(array(
 				'kayttajaid' => $row['kayttajaid'],
 				'kayttajannimi' => $row['kayttajannimi'],
-				'kayttajansposti' => $row['kayttajansposti'],
 				'salasana' => $row['salasana'],
 			));
 

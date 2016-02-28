@@ -2,7 +2,7 @@
 {% block content %}
 
   {% if message %}
-  <div class="alert alert-success">
+  <div class="alert alert-danger">
     {{message}}
   </div>
   {% endif %}
@@ -16,7 +16,7 @@
     <!-- Tekstikenttä käyttäjätunnukselle -->
     <div class="form-group">
       <label>Käyttäjätunnus (sähköposti)</label>
-      <input type="text" class="form-control" name="kayttajansposti" value="{{username}}">
+      <input type="text" class="form-control" name="kayttajaid" value="{{kayttajaid}}">
     </div>
 
     <!-- Salasanakenttä salasanalle -->

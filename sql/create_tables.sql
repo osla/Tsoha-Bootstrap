@@ -20,16 +20,15 @@ CREATE TABLE Opiskelija(
 );
 
 CREATE TABLE Kayttaja(
-	kayttajaID SERIAL PRIMARY KEY,
+	kayttajaID varchar(50) PRIMARY KEY,
 	kayttajanNimi varchar(50) NOT NULL,
-	kayttajanSposti varchar(50) NOT NULL,
 	salasana varchar(50) NOT NULL
 );
 
 CREATE TABLE Kurssi(
 	kurssiID SERIAL PRIMARY KEY,
 	kurssinNimi varchar(50) NOT NULL,
-	vastuuopettajaID INTEGER REFERENCES Kayttaja(kayttajaID) ON DELETE CASCADE,
+	vastuuopettajaID varchar(50) REFERENCES Kayttaja(kayttajaID) ON DELETE CASCADE,
 	laitosID INTEGER REFERENCES Laitos(laitosID) ON DELETE CASCADE
 );
 
@@ -48,7 +47,7 @@ CREATE TABLE Osallistumislista(
 );
 
 CREATE TABLE Kyselylista(
-	kayttajaID INTEGER REFERENCES Kayttaja(kayttajaID) ON DELETE CASCADE,
+	kayttajaID varchar(50) REFERENCES Kayttaja(kayttajaID) ON DELETE CASCADE,
 	kyselyID INTEGER REFERENCES Kysely(kyselyID) ON DELETE CASCADE
 );
 

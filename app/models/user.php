@@ -3,7 +3,7 @@
 class User extends BaseModel {
 
 //Atribuutit
-	public $kayttajaid, $kayttajannimi, $kayttajansposti, $salasana;
+	public $kayttajaid, $kayttajannimi, $salasana;
 
 	public function __construct($attributes) {
 		parent::__construct($attributes);
@@ -20,23 +20,21 @@ class User extends BaseModel {
 			$users[]=new User(array(
 				'kayttajaid' => $row['kayttajaid'],
 				'kayttajannimi' => $row['kayttajannimi'],
-				'kayttajansposti' => $row['kayttajansposti'],
 				'salasana' => $row['salasana'],
 			));
 		}
 		return $users;
 	}
 
-	public static function find($id){
-		$query= DB::connection()->prepare('SELECT * FROM Kayttaja WHERE kayttajaid=:$id LIMIT 1');
-		$query->execute(array('kayttajaid' => $id));
+	public static function find($kayttajaid){
+		$query= DB::connection()->prepare('SELECT * FROM Kayttaja WHERE kayttajaid=:kayttajaid LIMIT 1');
+		$query->execute(array('kayttajaid' => $kayttajaid));
 		$row =$query->fetch();
 
 		if ($row) {
 			$user = new User(array(
 				'kayttajaid' => $row['kayttajaid'],
 				'kayttajannimi' => $row['kayttajannimi'],
-				'kayttajansposti' => $row['kayttajansposti'],
 				'salasana' => $row['salasana'],
 			));
 
@@ -44,16 +42,15 @@ class User extends BaseModel {
 		}
 	}
 
-	public function authenticate($kayttajansposti, $salasana){
-		$query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE kayttajansposti =:kayttajansposti AND salasana =:salasana');
-		$query->execute(array('kayttajansposti' => $kayttajansposti, 'salasana' => $salasana));
+	public function authenticate($kayttajaid, $salasana){
+		$query = DB::connection()->prepare('SELECT Kayttaja.kayttajaid, Kayttaja.kayttajannimi, Kayttaja.salasana FROM Kayttaja WHERE kayttajaid=:kayttajaid AND salasana =:salasana LIMIT 1');
+		$query->execute(array('kayttajaid' => $kayttajaid, 'salasana' => $salasana));
 		$row = $query->fetch();
 		//Kint::dump($row);
 		if($row){
 			$user = new User(array(
 				'kayttajaid' => $row['kayttajaid'],
 				'kayttajannimi' => $row['kayttajannimi'],
-				'kayttajansposti' => $row['kayttajansposti'],
 				'salasana' => $row['salasana']
 			));
 
@@ -65,9 +62,9 @@ class User extends BaseModel {
 	}
 
 	public function save() {
-		$query =DB::connection()->prepare('INSERT INTO Kayttaja (kayttajannimi, kayttajansposti,
-		 salasana) VALUES (:kayttajannimi, :kayttajansposti, :salasana) RETURNING kayttajaid');
-		$query->execute(array('kayttajannimi' => $this->kayttajannimi, 'kayttajansposti' => $this->kayttajansposti,
+		$query =DB::connection()->prepare('INSERT INTO Kayttaja (kayttajaid, kayttajannimi, 
+		 salasana) VALUES (:kayttajaid, :kayttajannimi, :salasana) RETURNING kayttajaid');
+		$query->execute(array('kayttajaid' => $this->kayttajaid, 'kayttajannimi' => $this->kayttajannimi,
 		 'salasana' => $this->salasana));
 		$row = $query->fetch();
 		$this->kayttajaid = $row['kayttajaid'];

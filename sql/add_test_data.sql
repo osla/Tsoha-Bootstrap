@@ -2,14 +2,14 @@
 INSERT INTO Opiskelija (sposti) VALUES ('mika.mallikas@helsinki.fi');
 INSERT INTO Opiskelija (sposti) VALUES ('timo.mallikas@helsinki.fi');
 INSERT INTO Laitos (laitoksenNimi) VALUES ('tietojenkäsittelytieteen laitos');
-INSERT INTO Kayttaja (kayttajanNimi, kayttajanSposti, salasana) VALUES ('Opettaja, Olli', 'olli.opettaja@helsinki.fi', 'olli123');
-INSERT INTO Kayttaja (kayttajanNimi, kayttajanSposti, salasana) VALUES ('Mallikas, Mikko', 'mikko.mallikas@helsinki.fi', 'mikko123');
+INSERT INTO Kayttaja (kayttajaid, kayttajannimi, salasana) VALUES ('olli.opettaja@helsinki.fi', 'Olli Opettaja', 'olli123');
+INSERT INTO Kayttaja (kayttajaid, kayttajannimi, salasana) VALUES ('mikko.mallikas@helsinki.fi', 'Mikko Mallikas', 'mikko123');
 INSERT INTO Kurssi (kurssinNimi, laitosid) VALUES ('Ohjelmistotuotanto', '1');
 INSERT INTO Kurssi (kurssinNimi, laitosid) VALUES ('Johdatus tietojenkäsittelytieteeseen', '1');
 INSERT INTO Kysely (kyselynnimi, kurssiID, tila) VALUES ('Ohtu syksy 2015', '1', 'false');
 INSERT INTO Kysely (kyselynnimi, kurssiID, tila) VALUES ('Ohtu vuodenvaihde 2015', '1', 'true');
-INSERT INTO Kyselylista (kayttajaid, kyselyid) VALUES ('2', '1');
-INSERT INTO Kyselylista (kayttajaid, kyselyid) VALUES ('2', '2');
+INSERT INTO Kyselylista (kayttajaid, kyselyid) VALUES ('olli.opettaja@helsinki.fi', '1');
+INSERT INTO Kyselylista (kayttajaid, kyselyid) VALUES ('mikko.mallikas@helsinki.fi', '2');
 INSERT INTO Org_luokka (luokanNimi) VALUES ('Tiedekunta');
 INSERT INTO Org_luokka (luokanNimi) VALUES ('Laitos');
 INSERT INTO Org_luokka (luokanNimi) VALUES ('Kurssi');
