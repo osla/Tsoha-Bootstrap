@@ -82,19 +82,11 @@ class Kysely extends BaseModel{
 		$row = $query->fetch();
 		
 		$this->kyselyid = $row['kyselyid'];
-		
+
 		$query = DB::connection()->prepare('INSERT INTO Kyselylista (kayttajaid, kyselyid)
 			VALUES (:kayttajaid, :kyselyid)');
 		$query->execute(array('kayttajaid' => $this->kayttajaid, 'kyselyid' => $this->kyselyid));
 
-
-		//Kint::trace();
-		//Kint::dump($row);
-
-		
-
-		// lisätään kyselylistaan kysely oikealle käyttäjälle kirjautumisen perusteella
-		//$query = DB::connection()->prepare('INSERT INTO Kyselylista (kyselyid, kurssi));
 	}
 
 	public function update(){
@@ -103,10 +95,10 @@ class Kysely extends BaseModel{
 			WHERE kyselyid=:kyselyid'); 
 		
 		$query->execute(array('kyselyid' => $this->kyselyid, 'kyselynnimi' => $this->kyselynnimi, 'kurssiid' => $this->kurssiid, 'alkupvm' => $this->alkupvm, 'loppupvm' => $this->loppupvm, 'tila' => $this->tila));
-		//$row = $query->fetch();
+		$row = $query->fetch();
 
 		//Kint::dump($row);
-		//$this->kyselyid = $row['kyselyid'];
+
 	}
 
 	public function destroy(){

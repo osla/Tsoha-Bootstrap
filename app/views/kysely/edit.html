@@ -19,8 +19,7 @@
   <form method="post" action="{{base_path}}/kysely/{{attributes.kyselyid}}/edit">
     
     <div class="form-group">
-      <label>Kyselyn ID:</label>
-      <input name="kyselyid" class="form-control" value="{{attributes.kyselyid}}">
+      <input type="hidden" name="kyselyid" class="form-control" value="{{attributes.kyselyid}}">
     </div>
 
     <div class="form-group">

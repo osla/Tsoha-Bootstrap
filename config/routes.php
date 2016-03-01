@@ -1,65 +1,50 @@
 <?php
 
-  // $routes->get('/', function() {
-  //   HelloWorldController::index();
-  // });
+function check_logged_in() {
+  BaseController::check_logged_in();
+}  
 
   $routes->get('/hiekkalaatikko', function() {
     KyselyController::update(22);
   });
 
-  $routes->get('/inquiry_list', function() {
-    HelloWorldController::inquiry_list();
-  });
-
-  $routes->get('/inquiry_show', function() {
-    HelloWorldController::inquiry_show();
-  });
-
-  $routes->get('/course_show', function() {
-    HelloWorldController::course_show();
-  });
-
-  $routes->get('/inquiry_edit', function() {
-    HelloWorldController::inquiry_edit();
-  });
 //Tästä eteenpäin varsinaisen sovelluksen polut
 //Kyselyiden listaussivu
-  $routes->get('/kysely_lista', function() {
+  $routes->get('/kysely_lista','check_logged_in', function() {
     KyselyController::index();
   });
 
-  $routes->get('/', function() {
+  $routes->get('/','check_logged_in', function() {
     KyselyController::index();
   });
 
 //Kyselyn lisäyslomakkeen näyttäminen
-  $routes->get('/kysely/uusi', function(){
+  $routes->get('/kysely/uusi','check_logged_in', function(){
     KyselyController::create();
   });
 
 //Kyselyn esittelysivu
-  $routes->get('/kysely/:id', function($id){
+  $routes->get('/kysely/:id', 'check_logged_in', function($id){
     KyselyController::find($id);
   });
   
 //Kyselyn lisääminen tietokantaan
-  $routes->post('/kysely/', function(){
+  $routes->post('/kysely/', 'check_logged_in', function(){
     KyselyController::store();
   });
 
 //Kyselyn muokkauslomakkeen esittäminen
-  $routes->get('/kysely/:id/edit', function($id){
+  $routes->get('/kysely/:id/edit', 'check_logged_in', function($id){
     KyselyController::edit($id);
   });
 
 //Kyselyn muokkaaminen
-  $routes->post('/kysely/:id/edit', function($id){
+  $routes->post('/kysely/:id/edit', 'check_logged_in', function($id){
     KyselyController::update($id);
   });
 
 //Kyselyn poisto
-  $routes->post('/kysely/:id/destroy', function($id){
+  $routes->post('/kysely/:id/destroy', 'check_logged_in', function($id){
     KyselyController::destroy($id);
   });
 

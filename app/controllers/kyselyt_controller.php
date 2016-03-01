@@ -54,7 +54,7 @@ class KyselyController extends BaseController{
 		self::check_logged_in();
 		//haetaan uuden kyselyn luomiseen tarvittavat tiedot
 		$kurssit = Kurssi::all();
-		$kayttajat = Kayttaja::all();
+		$kayttajat = User::all();
 		View::make('kysely/uusi.html', array('kurssit' => $kurssit, 'kayttajat' => $kayttajat));
 	}
 
