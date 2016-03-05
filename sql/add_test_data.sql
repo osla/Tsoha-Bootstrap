@@ -2,8 +2,8 @@
 INSERT INTO Opiskelija (sposti) VALUES ('mika.mallikas@helsinki.fi');
 INSERT INTO Opiskelija (sposti) VALUES ('timo.mallikas@helsinki.fi');
 INSERT INTO Laitos (laitoksenNimi) VALUES ('tietojenkäsittelytieteen laitos');
-INSERT INTO Kayttaja (kayttajaid, kayttajannimi, salasana) VALUES ('olli.opettaja@helsinki.fi', 'Olli Opettaja', 'olli123');
-INSERT INTO Kayttaja (kayttajaid, kayttajannimi, salasana) VALUES ('mikko.mallikas@helsinki.fi', 'Mikko Mallikas', 'mikko123');
+INSERT INTO Kayttaja (kayttajaid, kayttajannimi, salasana, admin) VALUES ('olli.opettaja@helsinki.fi', 'Olli Opettaja', 'olli123', 'true');
+INSERT INTO Kayttaja (kayttajaid, kayttajannimi, salasana, admin) VALUES ('mikko.mallikas@helsinki.fi', 'Mikko Mallikas', 'mikko123', 'false');
 INSERT INTO Kurssi (kurssinNimi, laitosid) VALUES ('Ohjelmistotuotanto', '1');
 INSERT INTO Kurssi (kurssinNimi, laitosid) VALUES ('Johdatus tietojenkäsittelytieteeseen', '1');
 INSERT INTO Kysely (kyselynnimi, kurssiID, tila) VALUES ('Ohtu syksy 2015', '1', 'false');

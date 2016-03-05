@@ -62,3 +62,12 @@ function check_logged_in() {
   $routes->post('/logout', function(){
     UserController::logout();
   });
+
+  $routes->get('/kayttaja/kayttajalista','check_logged_in', function() {
+    UserController::index();
+  });
+
+    $routes->get('/kayttaja/rekisteroidy',function() {
+    UserController::create();
+  });
+

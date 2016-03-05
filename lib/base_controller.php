@@ -25,4 +25,8 @@
       Redirect::to('/login', array('message' => 'Olet kirjautunut ulos!'));
     }
 
+    public static function check_admin(){
+      
+    }
+
   }

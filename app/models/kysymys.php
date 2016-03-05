@@ -2,7 +2,7 @@
 
 class Kysymys extends BaseModel{
 	//atribuutit
-	public $kysymysid, $kuvaus, $vastausluokka, $kyselyid, $luokannimi;
+	public $kysymysid, $kuvaus, $vastausluokka, $kyselyid, $orgluokka;
 	//konstruktori
 	public function _construct($attributes){
 		parent::_construct($attributes);
@@ -10,8 +10,8 @@ class Kysymys extends BaseModel{
 
 	public static function all($kyselyid){
 		//Alustetaan kysely tietokantayhteydellä
-		$query=DB::connection()->prepare('SELECT Kysymyslista.kyselyid, Kysymys.kysymysid, 
-		Kysymys.kuvaus, Kysymys.vastausluokka, Org_luokka.luokannimi
+		$query=DB::connection()->prepare('SELECT Kysymys.kysymysid, 
+		Kysymys.kuvaus, Kysymys.vastausluokka, Kysymyslista.kyselyid, Org_luokka.luokkaid
 		FROM Kysymyslista
 		LEFT JOIN Org_luokka ON Kysymyslista.luokkaid = Org_luokka.luokkaid
 		LEFT JOIN Kysymys ON Kysymyslista.kysymysid = Kysymys.kysymysid
@@ -23,11 +23,11 @@ class Kysymys extends BaseModel{
 		$kysymykset = array();
 		foreach ($rows as $row) {
 			$kysymykset[] = new Kysymys(array(
-				'kyselyid' => $row['kyselyid'],
 				'kysymysid' => $row['kysymysid'],
 				'kuvaus' => $row['kuvaus'],
 				'vastausluokka' => $row['vastausluokka'],
-				'luokannimi' => $row['luokannimi']
+				'kyselyid' => $row['kyselyid'],
+				'luokkaid' => $row['luokkaid']
 			));
 		}
 

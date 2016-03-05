@@ -22,7 +22,8 @@ CREATE TABLE Opiskelija(
 CREATE TABLE Kayttaja(
 	kayttajaID varchar(50) PRIMARY KEY,
 	kayttajanNimi varchar(100) NOT NULL,
-	salasana varchar(50) NOT NULL
+	salasana varchar(50) NOT NULL,
+	admin boolean DEFAULT FALSE
 );
 
 CREATE TABLE Kurssi(

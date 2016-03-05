@@ -19,4 +19,19 @@ class UserController extends BaseController{
 			Redirect::to('/', array('message' => 'Tervetuloa takaisin ' . $user->kayttajannimi . '!'));
 		}
 	}
+
+	public static function index(){
+		//haetaan kaikki kurssikyselyt tietokannasta
+		$kayttajat = User::all();
+		View::make('kayttaja/kayttaja_lista.html', array('kayttajat' => $kayttajat));
+	}
+
+	public static function create(){
+		View::make('kayttaja/rekisteroidy.html');
+	}
+
+	public static function find(){
+
+	}
+
 }	
