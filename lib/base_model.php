@@ -69,5 +69,57 @@
 
     }
 
+    public function validate_id(){
+      $errors = array();
+      $id = User::find($this->kayttajaid);
+      if($id) {
+        $errors[]='Käyttäjätunnus on jo olemassa!';
+      }
+      return $errors;
+    }
+
+    public function validate_username(){
+      $errors = array();
+      if($this->kayttajannimi == '' || $this->kayttajannimi == null){
+        $errors[]='Kayttajan nimi ei saa olla tyhjä!';
+      }
+
+      if(strlen($this->kayttajannimi) < 3){
+        $errors[]='Nimen pituuden tulee olla vähintään 3 ja enintään 50 merkkiä!';
+      }
+
+      if(strlen($this->kayttajannimi) > 50){
+        $errors[]='Nimen pituuden tulee olla vähintään 3 ja enintään 50 merkkiä!';
+      }
+
+      return $errors;
+    } 
+
+    public function validate_userid(){
+      $errors = array();
+      if($this->kayttajaid == '' || $this->kayttajaid == null){
+        $errors[]='Kayttajatunnus ei saa olla tyhjä!';
+      }
+
+      if(strlen($this->kayttajaid) < 3){
+        $errors[]='Kayttajatunnuksen pituuden tulee olla vähintään 3 ja enintään 50 merkkiä!';
+      }
+
+      if(strlen($this->kayttajaid) > 50){
+        $errors[]='Kayttajatunnuksen pituuden tulee olla vähintään 3 ja enintään 50 merkkiä!';
+      }
+
+      return $errors;
+    }
+
+    public function validate_password(){
+      $errors = array();
+      if(!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{5,15}$/', $this->salasana)){
+        $errors[]='Salasana ei kelpaa. Anna uusi salasana joka on 5-15 merkkiä, jossa on ainakin yksi numero ja kirjain';
+      }
+
+      return $errors;
+    }  
+
   }
 

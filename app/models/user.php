@@ -7,7 +7,7 @@ class User extends BaseModel {
 
 	public function __construct($attributes) {
 		parent::__construct($attributes);
-		$this->validators = array('validate_name');
+		$this->validators = array('validate_id', 'validate_username', 'validate_userid', 'validate_password');
 	}
 
 
@@ -66,9 +66,9 @@ class User extends BaseModel {
 
 	public function save() {
 		$query =DB::connection()->prepare('INSERT INTO Kayttaja (kayttajaid, kayttajannimi, 
-		 salasana, admin) VALUES (:kayttajaid, :kayttajannimi, :salasana, :admin) RETURNING kayttajaid');
+		 salasana) VALUES (:kayttajaid, :kayttajannimi, :salasana) RETURNING kayttajaid');
 		$query->execute(array('kayttajaid' => $this->kayttajaid, 'kayttajannimi' => $this->kayttajannimi,
-		 'salasana' => $this->salasana, 'admin' => $this->admin));
+		 'salasana' => $this->salasana));
 		$row = $query->fetch();
 		$this->kayttajaid = $row['kayttajaid'];
 	}
@@ -90,7 +90,16 @@ class User extends BaseModel {
 		}
 	}
 
-	public function checkAdmin(){
-		return $this->admin;
+	public function destroy(){
+		$query = DB::connection()->prepare('DELETE FROM Kayttaja WHERE kayttajaid = :kayttajaid');
+		$query->execute(array('kayttajaid' => $this->kayttajaid));
+
+	}
+
+	public function getId(){
+		return $this->kayttajaid;
+	}
+
+	public function setAdmin(){
 	}
 }

@@ -67,7 +67,17 @@ function check_logged_in() {
     UserController::index();
   });
 
-    $routes->get('/kayttaja/rekisteroidy',function() {
+  //Rekisteröitymislomakkeen näytäminen
+  $routes->get('/kayttaja/rekisteroidy',function() {
     UserController::create();
   });
 
+  //Käyttäjän lisääminen tietokantaan
+  $routes->post('/kayttaja/',function() {
+    UserController::store();
+  });
+
+  //Käyttäjän poisto
+  $routes->post('/kayttaja/:id/destroy', 'check_logged_in', function($id){
+    UserController::destroy($id);
+  });

@@ -39,7 +39,7 @@
         <div class="collapse navbar-collapse" id="navigation">
           <ul class="nav navbar-nav">
              <!-- Navigaation linkit -->
-          {% if user_logged_in %}   
+          {% if user_logged_in.admin %}   
             <li><a href="{{base_path}}/kayttaja/kayttajalista">Käyttäjät</a></li>
           {% endif %}
           </ul>

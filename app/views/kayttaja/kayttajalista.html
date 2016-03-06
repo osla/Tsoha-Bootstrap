@@ -23,8 +23,8 @@
         <th>Tunnus</th>
         <th>Salasana</th>
         <th>Admin</th>
-        <th>Kyselyitä</th>
-        <th></th>
+        <!--<th>Kyselyitä</th>-->
+        <!--<th></th>-->
         <th></th>
       </tr>
     </thead>
@@ -41,13 +41,12 @@
                 <label class="label label-danger">admin
               {% endif %}
         </td>
-        <td>{{kayttaja.klkm}}</td>
+        <!--<td>{{kayttaja.klkm}}</td>
         <th>
-          <!--{{forms.edit_button("#{base_path}/kysely/#{kysely.kyselyid}/edit")}}-->
-          <a href="{{base_path}}/kysely/{{kysely.kyselyid}}/edit" class="btn btn-default">Muokkaa</a>
-        </th>
+          <a href="{{base_path}}/kayttaja/{{kayttaja.kayttajaid}}/edit" class="btn btn-default">Muokkaa</a>
+        </th>-->
         <td>
-          {{forms.destroy_button("#{base_path}/kysely/#{kysely.kyselyid}/destroy")}}
+          {{forms.destroy_button("#{base_path}/kayttaja/#{kayttaja.kayttajaid}/destroy")}}
         </td>
       </tr>
       {% endfor %}

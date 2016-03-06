@@ -7,8 +7,14 @@ class KyselyController extends BaseController{
 	public static function index(){
 		//haetaan kaikki kurssikyselyt tietokannasta
 		self::check_logged_in();
-		$kyselyt = Kysely::all();
-		View::make('kysely/kysely_lista.html', array('kyselyt' => $kyselyt));
+		$user_logged_in = self::get_user_logged_in();
+		if($user_logged_in->admin){
+			$kyselyt = Kysely::all();
+			View::make('kysely/kysely_lista.html', array('kyselyt' => $kyselyt));
+		} else {
+			$kyselyt = Kysely::allForKayttaja($user_logged_in->kayttajaid);
+			View::make('kysely/kysely_lista.html', array('kyselyt' => $kyselyt));
+		}
 	}
 
 	public static function find($id){

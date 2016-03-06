@@ -40,6 +40,39 @@ class Kysely extends BaseModel{
 		return $kyselyt;
 	}
 
+	public static function allForKayttaja($id){
+		//Alustetaan kysely tietokantayhteydellä
+		$query=DB::connection()->prepare('SELECT Kysely.kyselyid, Kysely.kyselynnimi, Kysely.kurssiid,
+		Kysely.alkupvm, Kysely.loppupvm, Kysely.tila, Kayttaja.kayttajannimi, Kayttaja.kayttajaid, Kurssi.kurssinnimi
+		FROM Kysely 
+		LEFT JOIN Kyselylista ON Kysely.kyselyid = Kyselylista.kyselyid
+		LEFT JOIN Kayttaja ON Kyselylista.kayttajaid = Kayttaja.kayttajaid
+		LEFT JOIN Kurssi ON Kysely.kurssiid = Kurssi.kurssiid
+		WHERE Kyselylista.kayttajaid = :kayttajaid');
+
+		//Suoritetaan kysely
+		$query->execute(array('kayttajaid' => $id));
+		$rows = $query->fetchAll();
+		$kyselyt = array();
+
+		foreach ($rows as $row) {
+			$kyselyt[] = new Kysely(array(
+				'kyselyid' => $row['kyselyid'],
+				'kyselynnimi' => $row['kyselynnimi'],
+				'kurssiid' => $row['kurssiid'],
+				'alkupvm' => $row['alkupvm'],
+				'loppupvm' => $row['loppupvm'],
+				'tila' => $row['tila'],
+				'kayttajaid' => $row['kayttajaid'],
+				'kayttajannimi' => $row['kayttajannimi'],
+				'kurssinnimi' => $row['kurssinnimi']
+			));
+		}
+
+		return $kyselyt;
+	}
+
+
 	public static function find($kyselyid){
 		//$query=DB::connection()->prepare('SELECT * FROM Kysely WHERE kyselyid = :kyselyid LIMIT 1');
 		$query=DB::connection()->prepare('SELECT Kysely.kyselyid, Kysely.kyselynnimi, Kysely.kurssiid,
